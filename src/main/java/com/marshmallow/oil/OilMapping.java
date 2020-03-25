@@ -17,12 +17,14 @@ public class OilMapping implements Serializable {
     private int[] currentPosition = startingPosition;
 
     public int[] navigation(){
+        oilPatch();
         //iterating over each character in the navigation instructions
         char[] direction = this.navigationInstructions.toCharArray();
         for (char iter : direction){
             //switch statement for direction
             //switch (iter){
-             //   case "N":
+             //   case 'N':
+
 
             //}
         }
@@ -45,6 +47,16 @@ public class OilMapping implements Serializable {
         }
         //return flag variable
         return foo;
+    }
+
+    /**
+     * Simple void function that checks if the current position is on an oil patch.  If it is then it is cleaned up
+     * And the counter for patches cleaned is incremented
+     */
+    public void oilPatch(){
+        if(isOilPatch()){
+            this.patchesCleaned++;
+        }
     }
 
     public int getPatchesCleaned(){
