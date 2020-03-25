@@ -17,18 +17,40 @@ public class OilMapping implements Serializable {
     private int[] currentPosition = startingPosition;
 
     public int[] navigation(){
+        //Calling oilPatch to see if the starting position is on an oil patch.
         oilPatch();
         //iterating over each character in the navigation instructions
         char[] direction = this.navigationInstructions.toCharArray();
         for (char iter : direction){
             //switch statement for direction
-            //switch (iter){
-             //   case 'N':
-
-
-            //}
+            switch (iter){
+                /**With North and South equivalent to Y coordinates and East and West equivalent to X coordinates
+                 * areaSize[0] is equivalent to East/West coordinate and areaSize[1] is North/South coordinate.
+                **/
+                case 'N':
+                    //Simple validation check to see if moving up 1 square would put the position out of range
+                    if ((this.currentPosition[1] + 1) <= this.areaSize[1]){
+                        this.currentPosition[1]++;
+                    }
+                case 'E':
+                    if ((this.currentPosition[0]+1) <= this.areaSize[0]){
+                        this.currentPosition[0]++;
+                    }
+                case 'S':
+                    if((this.currentPosition[1]-1) >= 0){
+                        this.currentPosition[1]--;
+                    }
+                case 'W':
+                    if((this.currentPosition[0]-1) >= 0){
+                        this.currentPosition[0]--;
+                    }
+            }
+            /**After the validation checks and moving, call the function that checks if it is currently on an oil patch
+             * and if so increments the patches cleaned
+             */
+            oilPatch();
         }
-        return new int[]{1};
+        return getCurrentPosition();
     }
 
     /**
