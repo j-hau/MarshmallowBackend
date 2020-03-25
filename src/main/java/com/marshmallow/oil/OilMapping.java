@@ -1,9 +1,12 @@
 package com.marshmallow.oil;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Class for the JSON file which mirrors the format for Jackson to port data into.
+ * Declared variables with appropriate types.
+ * Get and Set methods included.
+ */
 public class OilMapping implements Serializable {
 
     private String navigationInstructions;

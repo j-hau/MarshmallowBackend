@@ -2,6 +2,12 @@ package com.marshmallow.oil;
 
 import java.io.Serializable;
 
+/**
+ * Class which takes the form of the expected output of the computation which will store the data.
+ * Variables declared with appropriate types.
+ * Get and Set methods included.
+ */
+
 public class Cleaning implements Serializable {
     private int[] finalPosition;
     private int numOfCleanedPatches;
