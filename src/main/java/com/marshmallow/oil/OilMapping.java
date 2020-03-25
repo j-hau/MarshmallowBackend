@@ -1,14 +1,15 @@
 package com.marshmallow.oil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OilMapping {
+public class OilMapping implements Serializable {
 
     private String navigationInstructions;
-    private List areaSize = new ArrayList();
-    private List startingPosition = new ArrayList();
-    private List oilPatches = new ArrayList();
+    private int[] areaSize;
+    private int[] startingPosition;
+    private int[][] oilPatches;
 
     public String getNavigationInstructions(){
         return navigationInstructions;
@@ -18,27 +19,27 @@ public class OilMapping {
         this.navigationInstructions = navigationInstructions;
     }
 
-    public List getAreaSize(){
+    public int[] getAreaSize(){
         return areaSize;
     }
 
-    public void setAreaSize(List areaSize){
+    public void setAreaSize(int[] areaSize){
         this.areaSize = areaSize;
     }
 
-    public List getStartingPosition(){
+    public int[] getStartingPosition(){
         return startingPosition;
     }
 
-    public void setStartingPosition(List startingPosition){
+    public void setStartingPosition(int[] startingPosition){
         this.startingPosition = startingPosition;
     }
 
-    public List getOilPatches(){
+    public int[][] getOilPatches(){
         return oilPatches;
     }
 
-    public void setOilPatches(List oilPatches){
+    public void setOilPatches(int[][] oilPatches){
         this.oilPatches = oilPatches;
     }
 
