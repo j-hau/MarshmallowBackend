@@ -45,28 +45,4 @@ public class MyController {
         return new OilMapping(inputVal);
     }
      **/
-
-    @RequestMapping("/thisDir")
-    public String thisDir(){
-        return "thisDir.html";
-    }
-
-    @RequestMapping("/sayHello")
-    @GetMapping
-    /**
-     * {"aa":"bb","foo":"bar","key":"value"}
-     * is the output of this, it is in rough json format, if can figure out
-     * how to write into a file then it will be a json.
-     *
-     * When you search localhost:8080/sayHello, it returns that onto the screen
-     */
-    public Map<String, String> sayHello() {
-        HashMap<String, String> map = new HashMap<>();
-        map.put("key", "value");
-        map.put("foo", "bar");
-        map.put("aa", "bb");
-        return map;
-    }
-
-
 }
