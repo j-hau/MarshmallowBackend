@@ -15,8 +15,8 @@ public class MyController {
     @RequestMapping(value = "cleaner", method = RequestMethod.POST)
     public Cleaning cleaner(@RequestBody OilMapping data){
         Cleaning result = new Cleaning();
-        result.setFinalPosition(new int[] {5,5});
-        result.setNumOfCleanedPatches(5);
+        result.setFinalPosition(data.navigation());
+        result.setNumOfCleanedPatches(data.getPatchesCleaned());
         return result;
     }
 
