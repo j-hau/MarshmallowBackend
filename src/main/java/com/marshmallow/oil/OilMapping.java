@@ -13,6 +13,55 @@ public class OilMapping implements Serializable {
     private int[] areaSize;
     private int[] startingPosition;
     private int[][] oilPatches;
+    private int patchesCleaned = 0;
+    private int[] currentPosition = startingPosition;
+
+    public int[] navigation(){
+        //iterating over each character in the navigation instructions
+        char[] direction = this.navigationInstructions.toCharArray();
+        for (char iter : direction){
+            //switch statement for direction
+            //switch (iter){
+             //   case "N":
+
+            //}
+        }
+        return new int[]{1};
+    }
+
+    /**
+     * Simple function that iterates though the oil patch and checks if the current position is on an oil patch
+     * @return a Boolean variable that indicates if it is on an oil patch.
+     */
+    public boolean isOilPatch(){
+        //Trying to disprove that it the current position is on an oil patch
+        Boolean foo = false;
+        //Loop through all oil patches
+        for (int[] pos : this.oilPatches){
+            //If it is currently on an oil patch then change flag variable to true
+            if(this.currentPosition[0] == pos[0] && this.currentPosition[1] == pos[1]){
+                foo = true;
+            }
+        }
+        //return flag variable
+        return foo;
+    }
+
+    public int getPatchesCleaned(){
+        return patchesCleaned;
+    }
+
+    public void setPatchesCleaned(int patchesCleaned) {
+        this.patchesCleaned = patchesCleaned;
+    }
+
+    public int[] getCurrentPosition(){
+        return this.currentPosition;
+    }
+
+    public void setCurrentPosition(int[] currentPosition) {
+        this.currentPosition = currentPosition;
+    }
 
     public String getNavigationInstructions(){
         return navigationInstructions;
