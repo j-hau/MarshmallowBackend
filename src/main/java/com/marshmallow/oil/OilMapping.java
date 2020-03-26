@@ -14,66 +14,87 @@ public class OilMapping implements Serializable {
     private int[] startingPosition;
     private int[][] oilPatches;
     private int patchesCleaned = 0;
-    private int[] currentPosition = startingPosition;
 
     public int[] navigation(){
-        //Calling oilPatch to see if the starting position is on an oil patch.
-        oilPatch();
-        //iterating over each character in the navigation instructions
+        /**
+         * This sets a pair of mutable and temporary coordinates that will be altered during the switch statement
+         * It also sets up direction which is an array of characters belonging to the navigation instructions
+         */
+        int X = this.startingPosition[0];
+        int Y = this.startingPosition[1];
         char[] direction = this.navigationInstructions.toCharArray();
+
         for (char iter : direction){
             //switch statement for direction
+
             switch (iter){
                 /**With North and South equivalent to Y coordinates and East and West equivalent to X coordinates
                  * areaSize[0] is equivalent to East/West coordinate and areaSize[1] is North/South coordinate.
+                 * Once the move has been validated, it binds the new value to the variable name and breaks out of switch.
                 **/
                 case 'N':
                     //Simple validation check to see if moving up 1 square would put the position out of range
-                    if ((this.currentPosition[1] + 1) <= this.areaSize[1]){
-                        this.currentPosition[1]++;
+                    if ((Y + 1) < this.areaSize[1]){
+                        Y = new Integer(Y+1);
+                        //System.out.println("In North");
+                        break;
                     }
                 case 'E':
-                    if ((this.currentPosition[0]+1) <= this.areaSize[0]){
-                        this.currentPosition[0]++;
+                    if ((X+1) <= this.areaSize[0]){
+                        X = new Integer(X+1);
+                        //System.out.println("In East");
+                        break;
                     }
                 case 'S':
-                    if((this.currentPosition[1]-1) >= 0){
-                        this.currentPosition[1]--;
+                    if((Y-1) >= 0){
+                        Y = new Integer(Y-1);
+                        //System.out.println("In South");
+                        break;
                     }
                 case 'W':
-                    if((this.currentPosition[0]-1) >= 0){
-                        this.currentPosition[0]--;
+                    if((X-1) >= 0){
+                        X = new Integer(X-1);
+                        //System.out.println("In West");
+                        break;
                     }
+
             }
-            /**After the validation checks and moving, call the function that checks if it is currently on an oil patch
-             * and if so increments the patches cleaned
+            /**After validating the move and moving the current set of coordinates are legal coordinates.
+             * It then updates the position of the robot to the new set of coordinates.
+             * After that it checks to see if the new coordinates lies ontop of an oil patch.
              */
+            setStartingPosition(new int[]{X,Y});
             oilPatch();
         }
-        return getCurrentPosition();
+        return new int[]{X,Y};
     }
 
     /**
-     * Simple function that iterates though the oil patch and checks if the current position is on an oil patch
+     * Simple function that iterates though the oil patch and checks if the current position is on an oil
+     * It iterates through every element in oilPatches.  If the current position matches that of an oil patch,
+     * the function returns true and the oil patch has its coordinates changed to {-1,-1} to stop it being read twice.
      * @return a Boolean variable that indicates if it is on an oil patch.
      */
-    public boolean isOilPatch(){
-        //Trying to disprove that it the current position is on an oil patch
-        Boolean foo = false;
+    public Boolean isOilPatch(){
         //Loop through all oil patches
+        Boolean foo = false;
+        int counter = 0;
         for (int[] pos : this.oilPatches){
             //If it is currently on an oil patch then change flag variable to true
-            if(this.currentPosition[0] == pos[0] && this.currentPosition[1] == pos[1]){
+            if(this.startingPosition[0] == pos[0] && this.startingPosition[1] == pos[1]){
                 foo = true;
+                //Changing the values in the oilPatches array to -1 so they cannot be read again.  -1 is a flag.
+                this.oilPatches[counter][0] = -1;
+                this.oilPatches[counter][1] = -1;
+                break;
             }
+            counter++;
         }
-        //return flag variable
         return foo;
     }
 
     /**
-     * Simple void function that checks if the current position is on an oil patch.  If it is then it is cleaned up
-     * And the counter for patches cleaned is incremented
+     * Simply checking if the current patch is an oil patch and incrementing the patches cleaned counter.
      */
     public void oilPatch(){
         if(isOilPatch()){
@@ -89,13 +110,6 @@ public class OilMapping implements Serializable {
         this.patchesCleaned = patchesCleaned;
     }
 
-    public int[] getCurrentPosition(){
-        return this.currentPosition;
-    }
-
-    public void setCurrentPosition(int[] currentPosition) {
-        this.currentPosition = currentPosition;
-    }
 
     public String getNavigationInstructions(){
         return navigationInstructions;
