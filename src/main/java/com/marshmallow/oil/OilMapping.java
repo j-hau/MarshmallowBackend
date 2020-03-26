@@ -37,7 +37,7 @@ public class OilMapping implements Serializable {
                 **/
                 case 'N':
                     //Simple validation check to see if moving up 1 square would put the position out of range
-                    if ((Y + 1) < this.areaSize[1]){
+                    if ((Y + 1) <= this.areaSize[1]){
                         Y = new Integer(Y+1);
                         //System.out.println("In North");
                         break;

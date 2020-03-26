@@ -1,1 +1,100 @@
-Write test code
+These are my test cases and instructions on how to use them.
+All my code was tested using Postman.
+
+To run the app:
+1) First import the project off of GitHub.  It is an open repository.
+2) Then to build the code, navigate to src/main/java/com.marshmallow.oil
+3) Run the file called OilApplication.java
+4) Look below for the url to create the POST request to and the test data I used/created.
+============================================================
+Please create a POST request to:
+
+localhost:8080/home/cleaner
+
+this is where the rest controller deals with the request.
+To have the data processed, paste the JSON data into the body of the POST request using Postman
+============================================================
+I used the test case provided to me in the documentation:
+
+Test case:
+
+{
+  "areaSize" : [5, 5],
+  "startingPosition" : [1, 2],
+  "oilPatches" : [
+    [1, 0],
+    [2, 2],
+    [2, 3]
+  ],
+  "navigationInstructions" : "NNESEESWNWW"
+}
+
+This produced the expected output:
+
+{
+  "finalPosition" : [1, 3],
+  "oilPatchesCleaned" : 1
+}
+----------------------------------------------------
+This case was designed to test the implementation of my code which will scan over the oil patch multiple times
+to check the cleaned patches variable is incremented repetatively.
+
+Test case:
+
+{
+  "areaSize" : [10, 10],
+  "startingPosition" : [5, 7],
+  "oilPatches" : [
+    [6, 2],
+    [5, 8],
+    [0, 0],
+    [4, 8],
+    [7, 5],
+    [4, 3]
+  ],
+  "navigationInstructions" : "NWSSSSSSNNNNNNS"
+}
+
+Which produces the expected output of:
+
+{
+    "finalPosition": [
+        4,
+        7
+    ],
+    "numOfCleanedPatches": 3
+}
+
+Because of the implementation that the oil patch data is changed to {-1,-1} after being counted which is an impossible
+coordinate it will not be read again
+--------------------------------------------------
+This case was designed to see if the robot would be constrained to the area in which is defined while cleaning up the
+patch that it was placed onto.
+
+Test case:
+
+{
+  "areaSize" : [0, 0],
+  "startingPosition" : [0, 0],
+  "oilPatches" : [
+    [6, 2],
+    [5, 8],
+    [0, 0],
+    [4, 8],
+    [7, 5],
+    [4, 3]
+  ],
+  "navigationInstructions" : "NEWS"
+}
+
+This produced the expected output of:
+
+{
+    "finalPosition": [
+        0,
+        0
+    ],
+    "numOfCleanedPatches": 1
+}
+----------------------------------------------------------------
+
