@@ -15,6 +15,10 @@ public class OilMapping implements Serializable {
     private int[][] oilPatches;
     private int patchesCleaned = 0;
 
+    /**
+     * Main function that is used to navigate through the oil field based upon the series of instructions recieved.
+     * @return a set of coordinates that mirror the final position of the robot
+     */
     public int[] navigation(){
         /**
          * This sets a pair of mutable and temporary coordinates that will be altered during the switch statement
@@ -26,7 +30,6 @@ public class OilMapping implements Serializable {
 
         for (char iter : direction){
             //switch statement for direction
-
             switch (iter){
                 /**With North and South equivalent to Y coordinates and East and West equivalent to X coordinates
                  * areaSize[0] is equivalent to East/West coordinate and areaSize[1] is North/South coordinate.
@@ -57,7 +60,6 @@ public class OilMapping implements Serializable {
                         //System.out.println("In West");
                         break;
                     }
-
             }
             /**After validating the move and moving the current set of coordinates are legal coordinates.
              * It then updates the position of the robot to the new set of coordinates.
