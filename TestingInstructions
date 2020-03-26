@@ -2,10 +2,10 @@ These are my test cases and instructions on how to use them.
 All my code was tested using Postman.
 
 To run the app:
-1) First import the project off of GitHub.  It is an open repository.
+1) First import the project off of GitHub using the URL.  I cloned it into IntelliJ.  It is an open repository.
 2) Then to build the code, navigate to src/main/java/com.marshmallow.oil
 3) Run the file called OilApplication.java
-4) Look below for the url to create the POST request to and the test data I used/created.
+4) Look below for the format to create the POST request to and the test data I used/created using Postman.
 ============================================================
 Please create a POST request to:
 
